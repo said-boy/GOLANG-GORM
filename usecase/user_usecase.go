@@ -26,6 +26,9 @@ func (u *UserUsecase) CreateUser(user *domain.User) error {
 			return errors.New("Field " + err.Field() + " in Entity User is " + err.Tag())
 		}
 	}
-	u.UserRepository.Save(user)
-	return nil
+	return u.UserRepository.Save(user)
+}
+
+func (u *UserUsecase) GetUserById(id int) (*domain.User, error) {
+	return u.UserRepository.GetById(id)
 }

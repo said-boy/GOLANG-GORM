@@ -19,6 +19,14 @@ func (u *UserRepository) Save(user *domain.User) error {
 }
 
 // 	GetById(id int) (*User, error)
+func (u *UserRepository) GetById(id int) (*domain.User, error) {
+	var user *domain.User
+	err := u.db.Where("id = ?", id).First(&user).Error
+	if err != nil {
+		return nil, err 
+	}
+	return user, nil
+}
 
 
 // 	GetAll() ([]*User, error)
