@@ -2,7 +2,7 @@ package domain
 
 type User struct {
 	ID     string `gorm:"primaryKey;autoIncrement;column:id;"`
-	Name   string `gorm:"column:name;"`
+	Name   string `gorm:"column:name;" validate:"required"`
 	Gender string `gorm:"column:gender;"`
 }
 

@@ -16,17 +16,26 @@ func main(){
 	}
 	defer a.Close()
 
-	user := domain.User{
-		Name: "Said",
+	u := usecase.NewUserUsecase(repository.NewUserRepository(db))
+
+	// user := domain.User{
+	// 	Name: "Said",
+	// 	Gender: "male",
+	// }
+	// u.CreateUser(&user)
+
+	// user2 := domain.User{
+	// 	Name: "Cindy",
+	// 	Gender: "female",
+	// }
+	// u.CreateUser(&user2)
+
+	user3 := domain.User{
 		Gender: "male",
 	}
-	u := usecase.NewUserUsecase(repository.NewUserRepository(db))
-	u.CreateUser(&user)
 
-	user2 := domain.User{
-		Name: "Cindy",
-		Gender: "female",
+	err = u.CreateUser(&user3)
+	if err != nil {
+		panic(err)
 	}
-	u2 := usecase.NewUserUsecase(repository.NewUserRepository(db))
-	u2.CreateUser(&user2)
 }
