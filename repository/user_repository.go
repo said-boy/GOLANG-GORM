@@ -34,3 +34,12 @@ func (u *UserRepository) GetAll() ([]*domain.User, error) {
 	err := u.db.Find(&users).Error
 	return users, err
 }
+
+// Update(id int) (*User, error)
+func (u *UserRepository) Update(newUser *domain.User) (*domain.User, error) {
+	var user *domain.User
+	err := u.db.Model(&user).Where("id = ?", newUser.ID).Updates(newUser).Find(&user).Error
+	return user, err
+}
+ 
+// Delete(id int) (error)

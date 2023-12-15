@@ -100,3 +100,24 @@ func TestGetAllUserSuccessful(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, 3, len(users))
 }
+
+func TestUpdateUserSuccessful(t *testing.T) {
+	db := database.OpenConnection()
+
+	a, err := db.DB()
+	if err != nil {
+		panic(err)
+	}
+	defer a.Close()
+
+	userUsecase := usecase.NewUserUsecase(repository.NewUserRepository(db))
+
+	updateUser := domain.User{
+		ID: "2",
+		Name: "Joko",
+	}
+	user, err := userUsecase.UpdateUser(&updateUser)
+	
+	assert.Nil(t, err)
+	assert.Equal(t, "Joko", user.Name)
+}
