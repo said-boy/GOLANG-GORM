@@ -121,3 +121,20 @@ func TestUpdateUserSuccessful(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, "Joko", user.Name)
 }
+
+func TestDeleteUserSuccessful(t *testing.T) {
+	db := database.OpenConnection()
+
+	a, err := db.DB()
+	if err != nil {
+		panic(err)
+	}
+	defer a.Close()
+
+	userUsecase := usecase.NewUserUsecase(repository.NewUserRepository(db))
+
+	user, err := userUsecase.DeleteUser(34)
+	
+	assert.Nil(t, err)
+	assert.Equal(t, 0, len(user.ID))
+}

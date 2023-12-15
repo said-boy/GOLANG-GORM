@@ -41,5 +41,10 @@ func (u *UserRepository) Update(newUser *domain.User) (*domain.User, error) {
 	err := u.db.Model(&user).Where("id = ?", newUser.ID).Updates(newUser).Find(&user).Error
 	return user, err
 }
- 
+
 // Delete(id int) (error)
+func (u *UserRepository) Delete(id int) (*domain.User, error) {
+	var user *domain.User
+	err := u.db.Delete(&user, "id = ?", id).Find(&user).Error
+	return user, err
+}

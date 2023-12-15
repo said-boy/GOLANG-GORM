@@ -40,3 +40,7 @@ func (u *UserUsecase) GetAllUser() ([]*domain.User, error) {
 func (u *UserUsecase) UpdateUser(newUser *domain.User) (*domain.User, error) {
 	return u.UserRepository.Update(newUser)
 }
+
+func (u *UserUsecase) DeleteUser(id int) (*domain.User, error) {
+	return u.UserRepository.Delete(id)
+}
