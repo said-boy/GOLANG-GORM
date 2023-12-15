@@ -83,3 +83,20 @@ func TestGetUserByIdFail(t *testing.T) {
 	assert.Nil(t, user)
 	assert.Equal(t, "record not found", err.Error())
 }
+
+func TestGetAllUserSuccessful(t *testing.T) {
+	db := database.OpenConnection()
+
+	a, err := db.DB()
+	if err != nil {
+		panic(err)
+	}
+	defer a.Close()
+
+	userUsecase := usecase.NewUserUsecase(repository.NewUserRepository(db))
+
+	users, err := userUsecase.GetAllUser()
+	
+	assert.Nil(t, err)
+	assert.Equal(t, 3, len(users))
+}

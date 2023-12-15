@@ -28,5 +28,9 @@ func (u *UserRepository) GetById(id int) (*domain.User, error) {
 	return user, nil
 }
 
-
 // 	GetAll() ([]*User, error)
+func (u *UserRepository) GetAll() ([]*domain.User, error) {
+	var users []*domain.User
+	err := u.db.Find(&users).Error
+	return users, err
+}

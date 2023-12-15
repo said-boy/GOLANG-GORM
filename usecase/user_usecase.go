@@ -32,3 +32,7 @@ func (u *UserUsecase) CreateUser(user *domain.User) error {
 func (u *UserUsecase) GetUserById(id int) (*domain.User, error) {
 	return u.UserRepository.GetById(id)
 }
+
+func (u *UserUsecase) GetAllUser() ([]*domain.User, error) {
+	return u.UserRepository.GetAll()
+}
