@@ -7,3 +7,9 @@ type UserRepository interface {
 	Update(newUser *User) (*User, error)
 	Delete(id int) (*User, error)
 }
+
+type PhoneRepository interface {
+	Save(*Phone) error
+	Update(*Phone) error
+	Delete(id int) error
+}
