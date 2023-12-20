@@ -7,10 +7,10 @@ import (
 
 type PhoneUsecase struct {
 	PhoneRepository *repository.PhoneRepository
-	PhoneDomain *domain.Phone
+	PhoneDomain     *domain.Phone
 }
 
-func NewPhoneUsecase(phoneRepository *repository.PhoneRepository ) *PhoneUsecase {
+func NewPhoneUsecase(phoneRepository *repository.PhoneRepository) *PhoneUsecase {
 	return &PhoneUsecase{
 		PhoneRepository: phoneRepository,
 	}
@@ -24,12 +24,12 @@ func (p *PhoneUsecase) SavePhone(phone *domain.Phone) error {
 	return p.PhoneRepository.Save(phone)
 }
 
-func (p *PhoneUsecase) UpdatePhone(phone *domain.Phone) error {
-	err := p.PhoneDomain.Validate(phone)
+func (p *PhoneUsecase) UpdatePhone(phoneOld *domain.Phone, phoneNew *domain.Phone) error {
+	err := p.PhoneDomain.Validate(phoneNew)
 	if err != nil {
 		return err
 	}
-	return p.PhoneRepository.Update(phone)
+	return p.PhoneRepository.Update(phoneOld, phoneNew)
 }
 
 func (p *PhoneUsecase) DeletePhone(id int) error {

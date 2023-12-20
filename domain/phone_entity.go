@@ -5,9 +5,8 @@ import (
 )
 
 type Phone struct {
-	ID        int    `gorm:"column:id;primaryKey;autoIncrement"`
-	Handphone string `gorm:"column:handphone;" validate:"required,e164"`
-	UserId    int   `gorm:"column:user_id"`
+	Handphone string `gorm:"column:handphone;primaryKey;" validate:"required,e164"`
+	UserId    int    `gorm:"column:user_id;primaryKey;"`
 }
 
 func (p *Phone) TableName() string {

@@ -10,6 +10,6 @@ type UserRepository interface {
 
 type PhoneRepository interface {
 	Save(*Phone) error
-	Update(*Phone) error
+	Update(phoneOld *Phone, phoneNew *Phone) error
 	Delete(id int) error
 }

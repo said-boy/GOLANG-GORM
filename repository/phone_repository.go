@@ -19,8 +19,8 @@ func (p *PhoneRepository) Save(phone *domain.Phone) error {
 }
 
 // Update(*Phone) error
-func (p *PhoneRepository) Update(phone *domain.Phone) error {
-	return p.db.Where("handphone = ? AND user_id = ?", phone.Handphone, phone.UserId).Updates(phone).Error
+func (p *PhoneRepository) Update(phoneOld *domain.Phone, phoneNew *domain.Phone) error {
+	return p.db.Model(domain.Phone{}).Where("handphone = ?", phoneOld.Handphone).Where("user_id = ?", phoneOld.UserId).Updates(phoneNew).Error
 }
 
 // Delete(id int) error
